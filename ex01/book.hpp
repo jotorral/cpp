@@ -10,16 +10,15 @@ const int FIELD_WIDTH = 10;
 
 class Contact
 {
-private:
+public:
+	Contact(void);
+	~Contact(void);
 	std::string _first_name;
 	std::string _last_name;
 	std::string _nickname;
 	std::string _phone_number;
 	std::string _darkest_secret;
 
-public:
-	Contact(void);
-	~Contact(void);
 	std::string	get_first_name(void);
 	void		save_first_name(std::string);
 	std::string	get_last_name(void);
@@ -39,11 +38,13 @@ public:
 	~PhoneBook(void);
 	void	add_contact(Contact &);
 	void	display_contacts();
+	void	adding_contact(const Contact& contact){};
 
 private:
 
-	Contact	contacts[MAX_CONTACTS];
+	Contact	arr_contacts[MAX_CONTACTS];
 	int		contactCount;
 };
+
 
 #endif

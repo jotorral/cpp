@@ -1,5 +1,14 @@
 #include "book.hpp"
 
+Contact::Contact()
+{
+	_first_name = "";
+	_last_name = "";
+	_nickname = "";
+	_phone_number = "";
+	_darkest_secret = "";
+}
+
 Contact::Contact(void){return;}
 
 Contact::~Contact(void){return;}
@@ -60,7 +69,7 @@ void PhoneBook::add_contact(Contact &new_contact)
 {
 	if (contactCount < MAX_CONTACTS)
 	{
-		contacts[contactCount] = new_contact;
+		arr_contacts[contactCount] = new_contact;
 		contactCount++;
 	}
 	else
@@ -75,11 +84,11 @@ void PhoneBook::display_contacts()
 	for (int i = 0; i < contactCount; i++)
 	{
 		std::cout << "Contacto: " << i + 1 << ";" << std::endl;
-		std::cout << "Nombre: " << contacts[i].get_first_name() << std::endl;
-        std::cout << "Apellido: " << contacts[i].get_last_name() << std::endl;
-        std::cout << "Apodo: " << contacts[i].get_nickname() << std::endl;
-        std::cout << "Teléfono: " << contacts[i].get_phone_number() << std::endl;
-        std::cout << "Secreto oscuro: " << contacts[i].get_darkest_secret() << std::endl;
+		std::cout << "Nombre: " << arr_contacts[i].get_first_name() << std::endl;
+        std::cout << "Apellido: " << arr_contacts[i].get_last_name() << std::endl;
+        std::cout << "Apodo: " << arr_contacts[i].get_nickname() << std::endl;
+        std::cout << "Teléfono: " << arr_contacts[i].get_phone_number() << std::endl;
+        std::cout << "Secreto oscuro: " << arr_contacts[i].get_darkest_secret() << std::endl;
         std::cout << std::endl; // Separador entre contactos
 	}
 }
@@ -100,7 +109,7 @@ int main(void)
 {
 	std::string menu_option;
 	
-	std::system("clear");
+//	std::system("clear");
 	print_menu();
 	while(1)
 	{
@@ -112,6 +121,11 @@ int main(void)
 		}
 		else if (menu_option == "SEARCH")
 		{
+			for(int i = 0; i < 8; i++)
+			{
+				PhoneBook	phoneBook;
+				phoneBook.adding_contact (Contact("0","0","0","0","0"));
+			}
 			std::cout << "has seleccionado: SEARCH" << std::endl;
 			return (0);
 		}
@@ -121,7 +135,7 @@ int main(void)
 		}
 		else
 		{
-				std::system("clear");
+//				std::system("clear");
 				print_menu();			
 		}
 	}
