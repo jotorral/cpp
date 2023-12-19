@@ -1,143 +1,142 @@
 #include "book.hpp"
 
-Contact::Contact()
+std::string str_truncate(const std::string& contact_field)
 {
-	_first_name = "";
-	_last_name = "";
-	_nickname = "";
-	_phone_number = "";
-	_darkest_secret = "";
-}
+	unsigned int	i;
+	std::string strTrunc;
 
-Contact::Contact(void){return;}
-
-Contact::~Contact(void){return;}
-
-PhoneBook::PhoneBook(void){return;}
-
-PhoneBook::~PhoneBook(void){return;}
-
-std::string	Contact::get_first_name(void)
-{
-	return _first_name;
-}
-
-void		Contact::save_first_name(std::string)
-{
-	std::cout << "First Name: ";
-	std::getline(std::cin, _first_name, '\n');
-}
-std::string	Contact::get_last_name(void)
-{
-	return _last_name;
-}
-
-void		Contact::save_last_name(std::string)
-{
-	std::cout << "Last Name: ";
-	std::getline(std::cin, _first_name, '\n');
-}	
-std::string	Contact::get_nickname(void)
-{
-	return _nickname;
-}
-void		Contact::save_nickname(std::string)
-{
-	std::cout << "Nickname: ";
-	std::getline(std::cin, _nickname, '\n');
-}
-std::string	Contact::get_phone_number(void)
-{
-	return _phone_number;
-}
-void		Contact::save_phone_number(std::string)
-{
-	std::cout << "Phone number: ";
-	std::getline(std::cin, _phone_number, '\n');
-}	
-std::string	Contact::get_darkest_secret(void)
-{
-	return _darkest_secret;
-}
-void		Contact::save_darkest_secret(std::string)
-{
-	std::cout << "Darkest secret: ";
-	std::getline(std::cin, _darkest_secret, '\n');
-}
-
-void PhoneBook::add_contact(Contact &new_contact)
-{
-	if (contactCount < MAX_CONTACTS)
+	for (i = 0; contact_field[i] != 0;i++)
 	{
-		arr_contacts[contactCount] = new_contact;
-		contactCount++;
+		if (i > 9)
+		{
+			strTrunc[i - 1] = '.';
+			break;
+		}
+		strTrunc[i] = contact_field[i];
+	}
+	strTrunc[i] = '\0';
+	return (strTrunc);
+}
+
+void PhoneBook::displayOneContact ()
+{
+	char	contactNumber;
+
+	std::cin >> contactNumber;
+	contactNumber = contactNumber - '0';
+	if ((unsigned int)contactNumber < bookSize && (unsigned int)contactNumber >= 0)
+	{
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << "Index:          " << (char)(contactNumber + '0') << std::endl;
+		std::cout << "First name:     " << contacts[(int)contactNumber]._firstName << std::endl;
+		std::cout << "Last name:      " << contacts[(int)contactNumber]._lastName << std::endl;
+		std::cout << "Nickname:       " << contacts[(int)contactNumber]._nickname << std::endl;
+		std::cout << "Phone number:   " << contacts[(int)contactNumber]._phoneNumber << std::endl;
+		std::cout << "Darkest secret: " << contacts[(int)contactNumber]._darkestSecret << std::endl << std::endl;
 	}
 	else
-	{
-		std::cout << "El directorio está lleno. No se pueeden agragar más contactos" << std::endl;
-	}
+		{
+		std::cout << "\n\n\n\n\n" << std::endl;
+		std::cout << "           -----------------------------------" << std::endl;
+		std::cout << "           |       NON EXISTING NUMBER       |" << std::endl;
+		std::cout << "           -----------------------------------" << std::endl;
+		std::cout << "\n\n\n\n\n" << std::endl;
+		return;
+	}	
 }
 
-void PhoneBook::display_contacts()
+void PhoneBook::displayContacts()
 {
-	std::cout << "Lista de contactos: " << std::endl;
-	for (int i = 0; i < contactCount; i++)
+	if (bookSize == 0)
 	{
-		std::cout << "Contacto: " << i + 1 << ";" << std::endl;
-		std::cout << "Nombre: " << arr_contacts[i].get_first_name() << std::endl;
-        std::cout << "Apellido: " << arr_contacts[i].get_last_name() << std::endl;
-        std::cout << "Apodo: " << arr_contacts[i].get_nickname() << std::endl;
-        std::cout << "Teléfono: " << arr_contacts[i].get_phone_number() << std::endl;
-        std::cout << "Secreto oscuro: " << arr_contacts[i].get_darkest_secret() << std::endl;
-        std::cout << std::endl; // Separador entre contactos
+		std::cout << "\n\n\n\n\n" << std::endl;
+		std::cout << "           -----------------------------------" << std::endl;
+		std::cout << "           |  E M P T Y   P H O N E B O O K  |" << std::endl;
+		std::cout << "           -----------------------------------" << std::endl;
+		std::cout << "\n\n\n\n\n" << std::endl;
+		print_menu();
+		return;
+	}	
+	std::cout << "Phone directory:\n";
+	std::cout << "---------------------------------------------" << std::endl;
+	std::cout << "|  INDEX   |FIRST NAME|LAST NAME | NICKNAME |" << std::endl;
+	std::cout << "---------------------------------------------" << std::endl;
+	for (unsigned int i = 0; i < bookSize; ++i)
+	{
+		std::cout << "|" << std::setiosflags(std::ios::right) << std::setw(10) << i << "|"
+			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i]._firstName)[0] << "|"
+			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i]._lastName)[0] << "|"
+			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i]._nickname)[0] << "|" << std::endl;
+		std::cout << "---------------------------------------------" << std::endl;
 	}
+	std::cout << "Type in the index number you wish to see: ";
+	displayOneContact ();
+}
+
+void PhoneBook::addContact(std::string& _name, std::string& _last, std::string& _nick, std::string& _phone, std::string& _secret)
+{
+	std::cout << "Index:          " << contactCount << std::endl;
+	std::cout << "Name:           ";
+	std::getline(std::cin, _name);
+	while (_name[0] == '\0')
+	{
+		std::cout << "Name:           ";
+		std::getline(std::cin, _name);
+	}
+	contacts[contactCount]._firstName = _name;
+	std::cout << "Last name:      ";
+	std::getline(std::cin, _last);
+	while (_last[0] == '\0')
+	{
+		std::cout << "Last name:      ";
+		std::getline(std::cin, _last);
+	}	
+	contacts[contactCount]._lastName = _last;
+	std::cout << "Nickname:       ";
+	std::getline(std::cin, _nick);
+	while (_nick[0] == '\0')
+	{
+		std::cout << "Nickname:       ";
+		std::getline(std::cin, _nick);
+	}	
+	contacts[contactCount]._nickname = _nick;
+	std::cout << "Phone number:   ";
+	std::getline(std::cin, _phone);
+	while (_phone[0] == '\0')
+	{
+		std::cout << "Phone number:   ";
+		std::getline(std::cin, _phone);
+	}
+	contacts[contactCount]._phoneNumber = _phone;
+	std::cout << "Darkest secret: ";
+	std::getline(std::cin, _secret);
+	while (_secret[0] == '\0')
+	{
+		std::cout << "Darkest secret: ";
+		std::getline(std::cin, _secret);
+	}	
+	contacts[contactCount]._darkestSecret = _secret;
+	if (bookSize < MAX_CONTACTS)
+		bookSize = contactCount + 1;
+	contactCount = (contactCount + 1) % MAX_CONTACTS;
+	std::cout << "\n\n\nContact successfully added.\n\n\n" << std::endl;
+	print_menu();
 }
 
 void    print_menu(void)
 {
+	std::cout << std::endl;
+	std::cout << "********************************************************" << std::endl;
 	std::cout << "**************** The very best Phonebook ***************" << std::endl;
+	std::cout << "********************************************************" << std::endl;
+	std::cout << "*                                                      *" << std::endl;
+	std::cout << "*         Type in one of the next commands:            *" << std::endl;
+	std::cout << "*                                                      *" << std::endl;
+	std::cout << "*         ADD                                          *" << std::endl;
+	std::cout << "*         SEARCH                                       *" << std::endl;
+	std::cout << "*         EXIT                                         *" << std::endl;
+	std::cout << "*                                                      *" << std::endl;	
+	std::cout << "********************************************************" << std::endl;	
 	std::cout << std::endl;
-	std::cout << "************* Type in one of the next commands: ********" << std::endl;
-	std::cout << std::endl;
-	std::cout << "ADD" << std::endl;
-	std::cout << "SEARCH" << std::endl;
-	std::cout << "EXIT" << std::endl;
-	std::cout << std::endl;
-}
-
-int main(void)
-{
-	std::string menu_option;
-	
-//	std::system("clear");
-	print_menu();
-	while(1)
-	{
-		std::getline(std::cin, menu_option, '\n');
-		if (menu_option == "ADD")
-		{
-			std::cout << "Has seleccionado: ADD" << std::endl;
-			return (0);
-		}
-		else if (menu_option == "SEARCH")
-		{
-			for(int i = 0; i < 8; i++)
-			{
-				PhoneBook	phoneBook;
-				phoneBook.adding_contact (Contact("0","0","0","0","0"));
-			}
-			std::cout << "has seleccionado: SEARCH" << std::endl;
-			return (0);
-		}
-		else if (menu_option == "EXIT")
-		{
-			break;
-		}
-		else
-		{
-//				std::system("clear");
-				print_menu();			
-		}
-	}
-	return (0);
 }
