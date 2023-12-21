@@ -18,9 +18,9 @@ public:
 class PhoneBook
 {
 private:
-	Contact contacts[8];
-	int contactCount;
-	int	bookSize;
+	Contact 		contacts[8];
+	unsigned int 	contactCount;
+	unsigned int	bookSize;
 
 public:
 	PhoneBook(void);
@@ -39,7 +39,7 @@ void    print_menu(void);
 
 std::string str_truncate(const std::string& contact_field)
 {
-	int	i;
+	unsigned int	i;
 	std::string strTrunc;
 
 	for (i = 0; contact_field[i] != 0;i++)
@@ -50,29 +50,28 @@ std::string str_truncate(const std::string& contact_field)
 			break;
 		}
 		strTrunc[i] = contact_field[i];
-//		std::cout << i << strTrunc[i] << contact_field[i] << std::endl;
 	}
 	strTrunc[i] = '\0';
-//	std::cout << strTrunc << std::endl;
 	return (strTrunc);
 }
 
 
 void PhoneBook::displayOneContact ()
 {
-	int	contactNumber;
+	char	contactNumber;
 
 	std::cin >> contactNumber;
-	if (contactNumber < bookSize)
+	contactNumber = contactNumber - '0';
+	if ((unsigned int)contactNumber < bookSize && (unsigned int)contactNumber >= 0)
 	{
 		std::cout << std::endl;
 		std::cout << std::endl;
-		std::cout << "Index:          " << contactNumber << std::endl;
-		std::cout << "First name:     " << contacts[contactNumber]._firstName << std::endl;
-		std::cout << "Last name:      " << contacts[contactNumber]._lastName << std::endl;
-		std::cout << "Nickname:       " << contacts[contactNumber]._nickname << std::endl;
-		std::cout << "Phone number:   " << contacts[contactNumber]._phoneNumber << std::endl;
-		std::cout << "Darkest secret: " << contacts[contactNumber]._darkestSecret << std::endl << std::endl;
+		std::cout << "Index:          " << (char)(contactNumber + '0') << std::endl;
+		std::cout << "First name:     " << contacts[(int)contactNumber]._firstName << std::endl;
+		std::cout << "Last name:      " << contacts[(int)contactNumber]._lastName << std::endl;
+		std::cout << "Nickname:       " << contacts[(int)contactNumber]._nickname << std::endl;
+		std::cout << "Phone number:   " << contacts[(int)contactNumber]._phoneNumber << std::endl;
+		std::cout << "Darkest secret: " << contacts[(int)contactNumber]._darkestSecret << std::endl << std::endl;
 	}
 	else
 		{
@@ -101,7 +100,7 @@ void PhoneBook::displayContacts()
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "|  INDEX   |FIRST NAME|LAST NAME | NICKNAME |" << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
-	for (int i = 0; i < bookSize; ++i)
+	for (unsigned int i = 0; i < bookSize; ++i)
 	{
 		std::cout << "|" << std::setiosflags(std::ios::right) << std::setw(10) << i << "|"
 			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i]._firstName)[0] << "|"
@@ -185,9 +184,6 @@ int main()
 	PhoneBook myPhoneBook;
 	std::string menu_option;
 	std::string a, b, c, d, e;
-
-//	myPhoneBook.contactCount = 0;
-//	int	bookSize;
 
 	print_menu();
 	while(1)
