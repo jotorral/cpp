@@ -2,18 +2,22 @@
 
 PhoneBook::PhoneBook(void) : contactCount(0), bookSize(0)
 {
+//	std::cout << "Phonebook constructed" << std::endl;
 };
 
 PhoneBook::~PhoneBook(void)
 {
+//	std::cout << "Phonebook destructed" << std::endl;
 };
 
 Contact::Contact(void)
 {
+//	std::cout << "Contact constructed" << std::endl;
 };
 
 Contact::~Contact(void)
 {
+//	std::cout << "Contact destructed" << std::endl;
 };
 
 int main()
