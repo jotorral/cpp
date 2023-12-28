@@ -10,9 +10,10 @@ private:
     std::string name;
 
 public:
-    HumanB(void);
+    HumanB(std::string pName);
     ~HumanB(void);
     void    attack();
+    void    setWeapon(Weapon);
 };
 
 #endif

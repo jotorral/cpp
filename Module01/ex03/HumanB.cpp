@@ -1,7 +1,7 @@
-#include "HumanA.hpp"
+#include "HumanB.hpp"
 
-    HumanA::HumanA(void){}
-    HumanA::~HumanA(void){}
-    void    HumanA::attack(){
+    HumanB::HumanB(std::string pName) : name(pName){}
+    HumanB::~HumanB(void){}
+    void    HumanB::attack(){
         std::cout << this->name << " attacks with their " << this->weapon.getType() <<std::endl;
     }
