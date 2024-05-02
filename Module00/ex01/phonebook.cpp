@@ -1,5 +1,32 @@
 #include "book.hpp"
 
+std::string	Contact::getInfo (std::string type){
+	if (type == "first")
+		return (this->_firstName);
+	if (type == "last")
+		return (this->_lastName);
+	if (type == "nick")
+		return (this->_nickname);
+	if (type == "phone")
+		return (this->_phoneNumber);
+	if (type == "darkest")
+		return (this->_darkestSecret);
+return(0);
+}
+
+void		Contact::setInfo (std::string type, std::string data){
+	if (type == "first")
+		this->_firstName = data;
+	if (type == "last")
+		this->_lastName = data;
+	if (type == "nick")
+		this->_nickname = data;
+	if (type == "phone")
+		this->_phoneNumber = data;
+	if (type == "darkest")
+		this->_darkestSecret = data;
+}
+
 std::string str_truncate(const std::string& contact_field)
 {
 	unsigned int	i;
@@ -29,11 +56,11 @@ void PhoneBook::displayOneContact ()
 		std::cout << std::endl;
 		std::cout << std::endl;
 		std::cout << "Index:          " << (char)(contactNumber + '0') << std::endl;
-		std::cout << "First name:     " << contacts[(int)contactNumber]._firstName << std::endl;
-		std::cout << "Last name:      " << contacts[(int)contactNumber]._lastName << std::endl;
-		std::cout << "Nickname:       " << contacts[(int)contactNumber]._nickname << std::endl;
-		std::cout << "Phone number:   " << contacts[(int)contactNumber]._phoneNumber << std::endl;
-		std::cout << "Darkest secret: " << contacts[(int)contactNumber]._darkestSecret << std::endl << std::endl;
+		std::cout << "First name:     " << contacts[(int)contactNumber].getInfo("first") << std::endl;
+		std::cout << "Last name:      " << contacts[(int)contactNumber].getInfo("last") << std::endl;
+		std::cout << "Nickname:       " << contacts[(int)contactNumber].getInfo("nick") << std::endl;
+		std::cout << "Phone number:   " << contacts[(int)contactNumber].getInfo("phone") << std::endl;
+		std::cout << "Darkest secret: " << contacts[(int)contactNumber].getInfo("darkest") << std::endl << std::endl;
 	}
 	else
 		{
@@ -65,9 +92,9 @@ void PhoneBook::displayContacts()
 	for (unsigned int i = 0; i < bookSize; ++i)
 	{
 		std::cout << "|" << std::setiosflags(std::ios::right) << std::setw(10) << i << "|"
-			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i]._firstName)[0] << "|"
-			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i]._lastName)[0] << "|"
-			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i]._nickname)[0] << "|" << std::endl;
+			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i].getInfo("first"))[0] << "|"
+			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i].getInfo("last"))[0] << "|"
+			<< std::setiosflags(std::ios::right) << std::setw(10) << &str_truncate(contacts[i].getInfo("nick"))[0] << "|" << std::endl;
 		std::cout << "---------------------------------------------" << std::endl;
 	}
 	std::cout << "Type in the index number you wish to see: ";
@@ -84,7 +111,7 @@ void PhoneBook::addContact(std::string& _name, std::string& _last, std::string& 
 		std::cout << "Name:           ";
 		std::getline(std::cin, _name);
 	}
-	contacts[contactCount]._firstName = _name;
+	contacts[contactCount].setInfo("first", _name);
 	std::cout << "Last name:      ";
 	std::getline(std::cin, _last);
 	while (_last[0] == '\0')
@@ -92,7 +119,7 @@ void PhoneBook::addContact(std::string& _name, std::string& _last, std::string& 
 		std::cout << "Last name:      ";
 		std::getline(std::cin, _last);
 	}	
-	contacts[contactCount]._lastName = _last;
+	contacts[contactCount].setInfo("last", _last);
 	std::cout << "Nickname:       ";
 	std::getline(std::cin, _nick);
 	while (_nick[0] == '\0')
@@ -100,7 +127,7 @@ void PhoneBook::addContact(std::string& _name, std::string& _last, std::string& 
 		std::cout << "Nickname:       ";
 		std::getline(std::cin, _nick);
 	}	
-	contacts[contactCount]._nickname = _nick;
+	contacts[contactCount].setInfo("nick", _nick);
 	std::cout << "Phone number:   ";
 	std::getline(std::cin, _phone);
 	while (_phone[0] == '\0')
@@ -108,7 +135,7 @@ void PhoneBook::addContact(std::string& _name, std::string& _last, std::string& 
 		std::cout << "Phone number:   ";
 		std::getline(std::cin, _phone);
 	}
-	contacts[contactCount]._phoneNumber = _phone;
+	contacts[contactCount].setInfo("phone", _phone);
 	std::cout << "Darkest secret: ";
 	std::getline(std::cin, _secret);
 	while (_secret[0] == '\0')
@@ -116,7 +143,7 @@ void PhoneBook::addContact(std::string& _name, std::string& _last, std::string& 
 		std::cout << "Darkest secret: ";
 		std::getline(std::cin, _secret);
 	}	
-	contacts[contactCount]._darkestSecret = _secret;
+	contacts[contactCount].setInfo("darkest", _secret);
 	if (bookSize < MAX_CONTACTS)
 		bookSize = contactCount + 1;
 	contactCount = (contactCount + 1) % MAX_CONTACTS;

@@ -30,6 +30,9 @@ int main()
 	while(1)
 	{
 		std::getline(std::cin, menu_option, '\n');
+		if (std::cin.eof()==1) {
+			return(0);
+		}
 		if (menu_option == "ADD")
 		{
 			std::cout << "Has seleccionado: ADD" << std::endl;

@@ -10,15 +10,18 @@ const int FIELD_WIDTH = 10;
 
 class Contact
 {
-public:
+private:
 	std::string _firstName;
 	std::string _lastName;
 	std::string _nickname;
 	std::string _phoneNumber;
 	std::string _darkestSecret;
 
+public:
 	Contact(void);
 	~Contact(void);
+	std::string	getInfo (std::string type);
+	void		setInfo (std::string type, std::string data);
 };
 
 class PhoneBook
@@ -34,6 +37,7 @@ public:
 	void displayContacts(void);
 	void addContact(std::string&, std::string&, std::string&, std::string&, std::string&);
 	void displayOneContact ();
+
 };
 
 std::string str_truncate (const std::string& contact_field);
