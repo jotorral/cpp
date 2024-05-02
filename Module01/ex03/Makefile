@@ -1,14 +1,14 @@
 VAL	= valgrind -s --leak-check=full --show-leak-kinds=all
-RUN	= ./hi
+RUN = ./unnecessary
 
-NAME = hi
+NAME = unnecessary
 
-SRCS = main.cpp
+SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 CC = c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3# -fsanitize=address
 
 all: $(NAME)
 

@@ -1,8 +1,11 @@
 #include "HumanA.hpp"
 
-	HumanA::HumanA(Weapon pWeapon, std::string pName) : weapon(pWeapon), name(pName){
+	HumanA::HumanA(std::string pName, Weapon &pWeapon) : _name(pName), _weapon(pWeapon){
 	}
-	HumanA::~HumanA(void){}
+	HumanA::~HumanA(void){
+//		   std::cout << this->_name << " destruido" << std::endl;
+	}
+
 	void    HumanA::attack(){
-		std::cout << this->name << " attacks with their " << this->weapon.getType() <<std::endl;
+		std::cout << this->_name << " attacks with their " << this->_weapon.getType() <<std::endl;
 	}

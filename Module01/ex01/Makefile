@@ -1,4 +1,5 @@
 VAL	= valgrind -s --leak-check=full --show-leak-kinds=all
+
 RUN	= ./moar_brainz
 
 NAME = moar_brainz
@@ -8,12 +9,12 @@ SRCS = main.cpp Zombie.cpp zombieHorde.cpp
 OBJS = $(SRCS:.cpp=.o)
 CC = c++
 
-CFLAG = -Wall -Wextra -Werror -std=c++98# -g3 -fsanitize=address
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98# -g3 -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(SRCS) $(OBJS)
-		$(CC) $(CFLAG) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+		$(CC) $(OBJS) -o $(NAME)
 
 clean:
 		rm -f *.o
@@ -29,4 +30,4 @@ val:
 execute:
 		./$(NAME)
 
-.PHONY: clean fclean re all val execute
+.PHONY: clean fclean re all val execute san

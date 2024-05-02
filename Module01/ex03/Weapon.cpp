@@ -2,8 +2,9 @@
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 
-Weapon::Weapon(/* args */)
+Weapon::Weapon(const std::string& weaponType) : type(weaponType)
 {
+    this->type = weaponType;
 }
 
 Weapon::~Weapon()
