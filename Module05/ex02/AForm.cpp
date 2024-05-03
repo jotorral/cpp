@@ -173,7 +173,17 @@ void	setSigned(){}
 
 void	AForm::execute(Bureaucrat const & executor) const
 {
-	(void) executor;
+	if (executor.getGrade() < this->_gradeToExecute)
+	{
+		try
+		{
+			throw (AForm::GradeTooLowException());
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+	}
 	if (this->_signed == 0)
 	{
 		try
