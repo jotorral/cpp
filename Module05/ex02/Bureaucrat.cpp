@@ -160,3 +160,8 @@ void	Bureaucrat::signForm(AForm &form)
 	else
 		std::cout << CYAN << this->_name << GREEN << " hasn't signed "  << CYAN << form.getName() << RESET << std::endl;
 }
+
+void	Bureaucrat::executeForm(AForm const & form)
+{
+
+}
