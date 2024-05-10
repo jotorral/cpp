@@ -2,12 +2,12 @@
 
 Bureaucrat::Bureaucrat(): _name("DEFAULT_NAME"), _grade(150)
 {
-	std::cout << YELLOW << "A default Bureaucrat has been born!!" << RESET << std::endl;
+	std::cout << YELLOW << "A default Bureaucrat has been born!! " << _name << " " << _grade << RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name)
 {
-	std::cout << "\033[35mCopy Bureaucrat \033[0m" << this->_name << "\033[35m has been born!!" << RESET << std::endl;
+	std::cout << "\033[35mCopy Bureaucrat \033[0m" << this->_name << "\033[35m has been born!! " << other._grade << RESET << std::endl;
 	if (this != &other)
 	{
 		this->_grade = other._grade;
@@ -40,7 +40,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name)
 
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 {
-	std::cout << "\033[32mBureaucrat \033[0m" << this->_name << "\033[32m has been born!!!!!" << RESET << std::endl;
+	std::cout << "\033[32mBureaucrat \033[0m" << this->_name << "\033[32m has been born!!!!! " << this->_grade << RESET << std::endl;
 	if (this->_grade > 150)
 	{
 		this->_grade = 150;
@@ -69,12 +69,12 @@ Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "\033[33mA default Bureaucrat \033[0m" << this->_name << "\033[36m has died!!" << RESET << std::endl;
+	std::cout << "\033[33mA default Bureaucrat \033[0m" << this->_name << "\033[36m has died!! " << this->_grade << RESET << std::endl;
 }
 
 Bureaucrat&  Bureaucrat::operator=(const Bureaucrat& other)
 {
-	std::cout << YELLOW << "\033[34mBureaucrat assignation constructor called." << RESET << std::endl;
+	std::cout << YELLOW << "\033[34mBureaucrat copy assignation operator called. " << this->_name << " " << other._grade << RESET << std::endl;
 	if (&other != this)
 	{
 		this->_grade = other._grade;
