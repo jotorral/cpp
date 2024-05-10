@@ -3,11 +3,12 @@
 AForm::AForm(): _name("DEFAULT_FORM"), _gradeToSign(150), _gradeToExecute(150)
 {
 	this->_signed = false;
-	std::cout << RED << "A default Form has been born!!!" << RESET << std::endl;
+	std::cout << RED << "A default Form has been born!!! " << "Name: " << this->_name << " Signed: " << this->_signed << " Grade to Sign: " << this->_gradeToSign << " Grade to Execute: " << this->_gradeToExecute << RESET << std::endl;
 }
+
 AForm::AForm(const AForm& other): _name(other._name), _signed(other._signed), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
 {
-	std::cout << "Form " << this->_name << " has been born!!!" << std::endl;
+	std::cout << "Form " << this->_name << " has been born!!! Signed: " << this->_signed << " Grade to Sign: " << this->_gradeToSign << " Grade to Execute: " << this->_gradeToExecute << std::endl;
 	if (this->_gradeToSign > 150 || this->_gradeToExecute > 150)
 	{
 		try
@@ -32,10 +33,10 @@ AForm::AForm(const AForm& other): _name(other._name), _signed(other._signed), _g
 	}
 }
 
-AForm::AForm(int gradeToSign, int gradeToExecute): _name("DEFAULT_FORM"), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
+AForm::AForm(int gradeToSign, int gradeToExecute): _name("DEFAULT_FORM2"), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
 	this->_signed = false;
-	std::cout << CYAN << "A Form with name DEFAULT_FORM has been born!!!" << RESET << std::endl;
+	std::cout << CYAN << "A Form with name DEFAULT_FORM2 has been born!!!" << "Name: " << this->_name << " Signed: " << this->_signed << " Grade to Sign: " << this->_gradeToSign << " Grade to Execute: " << this->_gradeToExecute << RESET << std::endl;
 		if (this->_gradeToSign > 150 || this->_gradeToExecute > 150)
 	{
 		try
@@ -63,7 +64,7 @@ AForm::AForm(int gradeToSign, int gradeToExecute): _name("DEFAULT_FORM"), _grade
 AForm::AForm(std::string name, int gradeToSign, int gradeToExecute): _name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
 	this->_signed = false;
-	std::cout << RED << "The Form " << BLUE << this->_name << RED << " has been born!!!" << RESET << std::endl;
+	std::cout << RED << "The Form " << BLUE << this->_name << RED << " has been born!!! Signed: " << this->_signed << " Grade to Sign: " << this->_gradeToSign << " Grade to Execute: " << this->_gradeToExecute << std::endl;
 		if (this->_gradeToSign > 150 || this->_gradeToExecute > 150)
 	{
 		try
@@ -90,12 +91,13 @@ AForm::AForm(std::string name, int gradeToSign, int gradeToExecute): _name(name)
 
 AForm::~AForm()
 {
-	std::cout << RED << "Form " << BLUE << this->_name << RED << " has died!!!" << RESET << std::endl;
+	std::cout << RED << "Form " << BLUE << this->_name << RED << " has died!!! Signed: " << this->_signed << " Grade to Sign: " << this->_gradeToSign << " Grade to Execute: " << this->_gradeToExecute << std::endl;
 }
 
 void	AForm::setSigned(bool signedForm)
 {
 	this->_signed = signedForm;
+	std::cout << RED << "Form " << BLUE << this->_name << RED << " has been signed!!! Signed: " << this->_signed << " Grade to Sign: " << this->_gradeToSign << " Grade to Execute: " << this->_gradeToExecute << std::endl;
 }
 
 AForm&  AForm::operator=(const AForm& other)
@@ -103,6 +105,7 @@ AForm&  AForm::operator=(const AForm& other)
 	if (&other != this)
 	{
 		this->_signed = other._signed;
+		std::cout << RED << "Form " << BLUE << this->_name << RED << " has received the signed status from " << other._name << " Signed: " << other._signed << " Grade to Sign: " << this->_gradeToSign << " Grade to Execute: " << this->_gradeToExecute << std::endl;
 	}
 	return(*this);
 }
@@ -169,7 +172,9 @@ void	AForm::beSigned(Bureaucrat &bureaucrat)
 	}
 }
 
-void	setSigned(){}
+void	setSigned(bool signedForm)
+{
+}
 
 void	AForm::execute(Bureaucrat const & executor) const
 {

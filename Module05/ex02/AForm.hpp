@@ -11,7 +11,7 @@ class	AForm
 {
 private:
 	std::string const   _name;
-	bool                _signed;
+	bool				_signed;
 	int const           _gradeToSign;
 	int const           _gradeToExecute;
 public:
