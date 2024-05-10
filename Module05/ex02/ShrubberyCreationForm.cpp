@@ -2,24 +2,24 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(): AForm::AForm("ShrubberyCreationForm", 145, 137), _target("DEFAULT_ShrubberyCreationForm_TARGET")
 {
-	std::cout << RED << "A default ShrubberyCreationForm has been born!!!" << RESET << std::endl;
+	std::cout << RED << "A default ShrubberyCreationForm has been born!!! -> target: " << this->_target << RESET << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target): AForm::AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
 
-	std::cout << "ShrubberyCreationForm " << this->_target << " has been born!!!" << std::endl;
+	std::cout << "ShrubberyCreationForm -> target: " << this->_target << " has been born!!!" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other): AForm (other)
 {
 	this->_target = other._target;
-	std::cout << "Copy-ShrubberyCreationForm " << this->_target << " has been born!!!" << std::endl;
+	std::cout << "Copy-ShrubberyCreationForm -> target: " << this->_target << " has been born!!!" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	std::cout << RED << "ShrubberyCreationForm " << BLUE << this->_target << RED << " has died!!!" << RESET << std::endl;
+	std::cout << RED << "ShrubberyCreationForm -> target: " << BLUE << this->_target << RED << " has died!!!" << RESET << std::endl;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
@@ -35,7 +35,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void	ShrubberyCreationForm::setSigned(){}
 
-void	ShrubberyCreationForm::beExecuted(Bureaucrat const &bureaucrat) const
+void	ShrubberyCreationForm::execute(Bureaucrat const &bureaucrat) const
 {
 	std::ofstream	treeFile;
 	treeFile.open((this->_target + "_shrubbery").c_str());
@@ -48,23 +48,3 @@ void	ShrubberyCreationForm::beExecuted(Bureaucrat const &bureaucrat) const
 	treeFile.close();
 	std::cout << bureaucrat.getName() << " has created a shrubbery" << std::endl;
 }
-
-/**
-
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other)
-{
-    *this = other;
-}
-
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
-{
-    if (this != &other) {
-        // Llama al operador de asignación de la clase base
-        AForm::operator=(other);
-        // Copia el miembro específico de ShrubberyCreationForm
-        _target = other._target;
-    }
-    return *this;
-}
-
-*/

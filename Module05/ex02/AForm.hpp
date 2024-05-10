@@ -28,7 +28,7 @@ public:
 	void			setSigned(bool signedForm);
 	void			beSigned(Bureaucrat &bureaucrat);
 	virtual void	setSigned() = 0;
-	void			execute(Bureaucrat const & executor) const;
+	virtual void	execute(Bureaucrat const & executor) const;
 	class GradeTooLowException: public std::exception
 	{
 		public:

@@ -22,9 +22,7 @@ public:
 	ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 	~ShrubberyCreationForm();
 	virtual void		setSigned();
-	void				beExecuted(Bureaucrat const &bureaucrat) const;
+	void				execute(Bureaucrat const &bureaucrat) const;
 };
-
-// std::ostream    &operator<<(std::ostream &OutputFlux, ShrubberyCreationForm *object);
 
 #endif

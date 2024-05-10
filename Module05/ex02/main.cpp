@@ -6,20 +6,24 @@
 
 int main()
 {
-srand(time(NULL));
-ShrubberyCreationForm tree;
-Bureaucrat	pedro;
-tree.beExecuted(pedro);
 
-RobotomyRequestForm robo;
-Bureaucrat	juan;
-robo.beExecuted(juan);
+ShrubberyCreationForm tree("TREE");
+Bureaucrat	pedro ("PEDRO", 60);
+tree.execute(pedro);
+std::cout << std::endl;
 
-PresidentialPardonForm presi;
-Bureaucrat	dential;
-presi.beExecuted(dential);
+RobotomyRequestForm robo("ROBO");
+Bureaucrat	juan ("JUAN", 75);
+robo.execute(juan);
+std::cout << std::endl;
 
-/*	Bureaucrat juan;
+PresidentialPardonForm presi("PRESI");
+Bureaucrat	dential ("DENTIAL", 80);
+presi.execute(dential);
+std::cout << std::endl;
+
+/*	srand(time(NULL));
+	Bureaucrat juan;
 	Bureaucrat pedro("PEDRO", 75);
 	Bureaucrat pedro2(pedro);
 

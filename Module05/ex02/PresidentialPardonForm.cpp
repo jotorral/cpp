@@ -2,24 +2,24 @@
 
 PresidentialPardonForm::PresidentialPardonForm(): AForm::AForm("PresidentialPardonForm", 25, 5), _target("DEFAULT_PresidentialPardonForm_TARGET")
 {
-	std::cout << RED << "A default PresidentialPardonForm has been born!!!" << RESET << std::endl;
+	std::cout << RED << "A default PresidentialPardonForm has been born!!! -> target: " << this->_target << RESET << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string const &target): AForm::AForm("PresidentialPardonForm", 25, 5), _target(target)
 {
 
-	std::cout << "PresidentialPardonForm " << this->_target << " has been born!!!" << std::endl;
+	std::cout << "PresidentialPardonForm -> target: " << this->_target << " has been born!!! " << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other): AForm (other)
 {
 	this->_target = other._target;
-	std::cout << "Copy-PresidentialPardonForm " << this->_target << " has been born!!!" << std::endl;
+	std::cout << "Copy-PresidentialPardonForm -> target: " << this->_target << " has been born!!!" << std::endl;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
 {
-	std::cout << RED << "PresidentialPardonForm " << BLUE << this->_target << RED << " has died!!!" << RESET << std::endl;
+	std::cout << RED << "PresidentialPardonForm -> target: " << BLUE << this->_target << RED << " has died!!!" << RESET << std::endl;
 }
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
@@ -28,34 +28,14 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	{
 		AForm::operator=(other);
 		this->_target = other._target;
-		std::cout <<"Copy Operator " << this->_target << "Signed flag: " << AForm::getSigned() << std::endl;
+		std::cout <<"Copy Operator -> target: " << this->_target << "Signed flag: " << AForm::getSigned() << std::endl;
 	}
 	return (*this);
 }
 
 void	PresidentialPardonForm::setSigned(){}
 
-void	PresidentialPardonForm::beExecuted(Bureaucrat const &bureaucrat) const
+void	PresidentialPardonForm::execute(Bureaucrat const &bureaucrat) const
 {
-	std::cout << GREEN << bureaucrat.getName() << this->_target << " has been pardoned by Zaphod Beeblebrox !!!" << RESET << std::endl;
+	std::cout << GREEN << "Bureaucrat: " << bureaucrat.getName() << RESET << " with " << BLUE << getName() <<" -> target: " << this->_target << RED << " has been pardoned by Zaphod Beeblebrox !!!" << RESET << std::endl;
 }
-
-/**
-
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other)
-{
-    *this = other;
-}
-
-PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
-{
-    if (this != &other) {
-        // Llama al operador de asignación de la clase base
-        AForm::operator=(other);
-        // Copia el miembro específico de PresidentialPardonForm
-        _target = other._target;
-    }
-    return *this;
-}
-
-*/

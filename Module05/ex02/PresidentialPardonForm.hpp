@@ -14,17 +14,15 @@ class	Bureaucrat;
 class	PresidentialPardonForm: public AForm
 {
 private:
-	std::string _target;
+	std::string		_target;
 public:
 	PresidentialPardonForm();
 	PresidentialPardonForm(std::string const &target);
 	PresidentialPardonForm(const PresidentialPardonForm &other);
 	PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 	~PresidentialPardonForm();
-	virtual void		setSigned();
-	void				beExecuted(Bureaucrat const &bureaucrat) const;
+	virtual void	setSigned();
+	void			execute(Bureaucrat const &bureaucrat) const;
 };
-
-// std::ostream    &operator<<(std::ostream &OutputFlux, PresidentialPardonForm *object);
 
 #endif

@@ -163,5 +163,12 @@ void	Bureaucrat::signForm(AForm &form)
 
 void	Bureaucrat::executeForm(AForm const & form)
 {
-	(void) &form;
+	if (this->_grade >= form.getGradeToExecute())
+	{
+		form.execute(*this);
+	}
+	else
+	{
+		
+	}
 }
