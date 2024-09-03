@@ -9,7 +9,7 @@ private:
 
 public:
 	Zombie(void);
-	Zombie(std::string zombieName);make execute
+	Zombie(std::string zombieName);
 	~Zombie (void);
 	void	announce(void);
 	Zombie* newZombie(std::string name);

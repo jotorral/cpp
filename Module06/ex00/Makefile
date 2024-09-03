@@ -26,6 +26,6 @@ fclean: clean
 re: fclean $(NAME)
 
 execute:
-		./$(NAME)
+		./$(NAME) '*'
 
 .PHONY: all clean fclean re execute
